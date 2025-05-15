@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            margin-bottom: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulaire de Connexion</h1>
+    <form th:action="@{/users/login}" th:object="${userDto}" method="post">
+        <div>
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" th:field="*{username}"/>
+            <span class="error"
+                th:if="${#fields.hasErrors('username')}"
+                th:errors="*{username}">Erreur Username</span>
+        </div>
+        <div>
+            <label for="passwordHash">Mot de passe:</label>
+            <input type="password" id="passwordHash" th:field="*{passwordHash}"/>
+            <span class="error"
+                  th:if="${#fields.hasErrors('passwordHash')}"
+                  th:errors="*{passwordHash}">Erreur Password</span>
+        </div>
+        <div>
+            <button type="submit">Confirmer</button>
+        </div>
+    </form>
+</body>
+</html>

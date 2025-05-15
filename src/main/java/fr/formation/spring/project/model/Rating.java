@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name= "ratings")
+@Table(name= "rating")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,10 +30,10 @@ public class Rating {
     private LocalDateTime ratingDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "concerts_id", nullable = false)
+    @JoinColumn(name = "concert_id", nullable = false)
     private Concert concert;
 }

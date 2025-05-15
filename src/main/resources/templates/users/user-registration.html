@@ -1,0 +1,69 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            margin-bottom: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+    <body>
+        <h1>Formulaire d'inscription</h1>
+        <!-- th:object lie le formulaire à l'objet 'user' du modèle -->
+        <form th:action="@{/users/register}" th:object="${userDto}" method="post">
+            <div>
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" id="username" th:field="*{username}"/>
+                <!-- Espace pour afficher les erreurs de validation -->
+                <span class="error"
+                      th:if="${#fields.hasErrors('username')}"
+                      th:errors="*{username}">Erreur Username</span>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}"/>
+                <span class="error"
+                      th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}">Erreur Email</span>
+            </div>
+            <div>
+                <label for="passwordHash">Mot de passe:</label>
+                <input type="password" id="passwordHash" th:field="*{passwordHash}"/>
+                <span class="error"
+                      th:if="${#fields.hasErrors('passwordHash')}"
+                      th:errors="*{passwordHash}">Erreur Password</span>
+            </div>
+            <div>
+                <label for="confirmPassword">Confirmer le mot de passe:</label>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}"/>
+                <span class="error"
+                      th:if="${#fields.hasErrors('confirmPassword')}"
+                      th:errors="*{confirmPassword}">Erreur Confirmation</span>
+                <!-- Erreur globale (ex: mots de passe différents) -->
+                <span class="error"
+                      th:if="${#fields.hasGlobalErrors()}"
+                      th:each="err : ${#fields.globalErrors()}" th:text="${err}">Erreur Globale</span>
+            </div>
+            <div>
+                <button type="submit">S'inscrire</button>
+            </div>
+        </form>
+    </body>
+</html>

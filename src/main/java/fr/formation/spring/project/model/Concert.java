@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name= "concerts")
+@Table(name= "concert")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,6 +36,6 @@ public class Concert {
     @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
-    @OneToMany(mappedBy = "concerts", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<Rating>();
 }

@@ -32,6 +32,6 @@ public class User {
     @Column(nullable = false, length = 255)
     private String passwordHash;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings = new ArrayList<Rating>();
 }
