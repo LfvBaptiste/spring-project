@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="fr">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,25 +27,34 @@
     </style>
 </head>
 <body>
+    <th:block layout:fragment="secondNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/users/register}">S'inscrire</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/users/login}">Se Connecter</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/users/logout}">Se Déconnecter</a></li>
+        </ul>
+    </th:block>
     <h1>Formulaire de Connexion</h1>
-    <form th:action="@{/users/login}" th:object="${userDto}" method="post">
-        <div>
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" th:field="*{username}"/>
-            <span class="error"
-                th:if="${#fields.hasErrors('username')}"
-                th:errors="*{username}">Erreur Username</span>
-        </div>
-        <div>
-            <label for="passwordHash">Mot de passe:</label>
-            <input type="password" id="passwordHash" th:field="*{passwordHash}"/>
-            <span class="error"
-                  th:if="${#fields.hasErrors('passwordHash')}"
-                  th:errors="*{passwordHash}">Erreur Password</span>
-        </div>
-        <div>
-            <button type="submit">Confirmer</button>
-        </div>
-    </form>
+    <div layout:fragment="content">
+        <form th:action="@{/users/login}" th:object="${userDto}" method="post">
+            <div>
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" th:field="*{username}"/>
+                <span class="error"
+                    th:if="${#fields.hasErrors('username')}"
+                    th:errors="*{username}">Erreur Username</span>
+            </div>
+            <div>
+                <label for="passwordHash">Mot de passe:</label>
+                <input type="password" id="passwordHash" th:field="*{passwordHash}"/>
+                <span class="error"
+                      th:if="${#fields.hasErrors('passwordHash')}"
+                      th:errors="*{passwordHash}">Erreur Password</span>
+            </div>
+            <div>
+                <button type="submit">Confirmer</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

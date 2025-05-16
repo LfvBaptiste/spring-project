@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name= "concert")
@@ -38,4 +39,12 @@ public class Concert {
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<Rating>();
+
+    public void setBand(Optional<Band> band) {
+        band.ifPresent(value -> this.band = value);
+    }
+
+    public void setVenue(Optional<Venue> venue) {
+        venue.ifPresent(value -> this.venue = value);
+    }
 }

@@ -22,6 +22,11 @@ public class LoginController {
     private final UserService userService;
     public LoginController(UserService userService) {this.userService = userService;}
 
+    @GetMapping("/")
+    public String redirectToLogin() {
+        return "redirect:/users/login";
+    }
+
     // Affiche le formulaire vide
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -62,7 +67,6 @@ public class LoginController {
             BindingResult bindingResult
     ) {
         if(bindingResult.hasErrors()) {
-            System.out.println("Bindind validation error");
             return "users/user-login";
         }
         Boolean status = this.userService.checkUserLogin(userDTO, userDTO.getUsername(), userDTO.getPasswordHash());
@@ -73,4 +77,12 @@ public class LoginController {
             return "redirect:/users/login";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/users/login";
+    }
+
+
 }
